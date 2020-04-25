@@ -22,11 +22,10 @@ r = requests.get(url = URL, params = PARAMS)
 
 # I am happy to print if the response is OK otherwise I print the error
 if (r.status_code == 200):
+	data = r.json()
 	print('API RESPONSE -> 200')
-	print('')
-	data = r.json() 
-	print('Number of Bikes available at the London bike point -> '+id+':')
 	print('Last TS -> '+data['additionalProperties'][6]['modified'])
-	print('Number of available bikes -> '+data['additionalProperties'][6]['value'])
+	for i in range(len(data['additionalProperties'])):
+		print(data['additionalProperties'][i]['key']+' -> '+data['additionalProperties'][i]['value'])
 else:
 	print('ERROR -> '+r.status_code )
